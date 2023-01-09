@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements JGameLib.GameEven
     // User Event start ====================================
 
     public void onBtn1(View v) {
-        cardSoda.rect(0, 140, 100, 20);
+        cardSoda.screenRect(0, 140, 100, 20);
         gameLib.startSensorAccelerometer();
     }
 
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements JGameLib.GameEven
             float v = Math.max(v1,v2);
             if(v > cut) {
                 v = (v - cut) * rate;
-                cardSoda.rectGap(0, -v, 0, v);
+                cardSoda.screenRectGap(0, -v, 0, v);
                 if(cardSoda.dstRect.top < 10) {
                     gameLib.stopSensorAccelerometer();
                     gameLib.popupDialog(null, "Conguratulate! You pop the bottle.", "Close");
