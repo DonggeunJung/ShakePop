@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements JGameLib.GameEven
 
     // User Event start ====================================
 
-    public void onBtn1(View v) {
+    public void onBtnStart(View v) {
         cardSoda.screenRect(0, 140, 100, 20);
         gameLib.startSensorAccelerometer();
     }
