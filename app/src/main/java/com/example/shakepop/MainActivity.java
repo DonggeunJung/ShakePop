@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements JGameLib.GameEven
             if(v > cut) {
                 v = (v - cut) * rate;
                 cardSoda.screenRectGap(0, -v, 0, v);
-                if(cardSoda.dstRect.top < 10) {
+                if(cardSoda.screenRect().top < 10) {
                     gameLib.stopSensorAccelerometer();
                     gameLib.vibrate(0.5);
                     gameLib.popupDialog(null, "Conguratulate! You pop the bottle.", "Close");
