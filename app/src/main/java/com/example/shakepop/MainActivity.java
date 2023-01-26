@@ -6,33 +6,33 @@ import android.hardware.Sensor;
 import android.os.Bundle;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity implements JGameLib.GameEvent {
-    JGameLib gameLib = null;
-    JGameLib.Card gameBackground;
-    JGameLib.Card cardBottle;
-    JGameLib.Card cardSoda;
+public class MainActivity extends AppCompatActivity implements Mosaic.GameEvent {
+    Mosaic mosaic = null;
+    Mosaic.Card gameBackground;
+    Mosaic.Card cardBottle;
+    Mosaic.Card cardSoda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        gameLib = findViewById(R.id.gameLib);
+        mosaic = findViewById(R.id.mosaic);
         initGame();
     }
 
     private void initGame() {
-        gameLib.setScreenGrid(100, 160);
-        gameLib.listener(this);
-        gameBackground = gameLib.addCardColor(Color.rgb(0,0,0));
-        cardSoda = gameLib.addCardColor(Color.rgb(255,128,0), 0, 140, 100, 20);
-        cardBottle = gameLib.addCard(R.drawable.bottle_inverse);
+        mosaic.setScreenGrid(100, 160);
+        mosaic.listener(this);
+        gameBackground = mosaic.addCardColor(Color.rgb(0,0,0));
+        cardSoda = mosaic.addCardColor(Color.rgb(255,128,0), 0, 140, 100, 20);
+        cardBottle = mosaic.addCard(R.drawable.bottle_inverse);
     }
 
     // User Event start ====================================
 
     public void onBtnStart(View v) {
         cardSoda.screenRect(0, 140, 100, 20);
-        gameLib.startSensorAccelerometer();
+        mosaic.startSensorAccelerometer();
     }
 
     // User Event end ====================================
@@ -40,10 +40,10 @@ public class MainActivity extends AppCompatActivity implements JGameLib.GameEven
     // Game Event start ====================================
 
     @Override
-    public void onGameWorkEnded(JGameLib.Card card, JGameLib.WorkType workType) {}
+    public void onGameWorkEnded(Mosaic.Card card, Mosaic.WorkType workType) {}
 
     @Override
-    public void onGameTouchEvent(JGameLib.Card card, int action, float x, float y) {}
+    public void onGameTouchEvent(Mosaic.Card card, int action, float x, float y) {}
 
     @Override
     public void onGameSensor(int sensorType, float x, float y, float z) {
@@ -54,16 +54,16 @@ public class MainActivity extends AppCompatActivity implements JGameLib.GameEven
                 v = (v - cut) * rate;
                 cardSoda.screenRectGap(0, -v, 0, v);
                 if(cardSoda.screenRect().top < 10) {
-                    gameLib.stopSensorAccelerometer();
-                    gameLib.vibrate(0.5);
-                    gameLib.popupDialog(null, "Conguratulate! You pop the bottle.", "Close");
+                    mosaic.stopSensorAccelerometer();
+                    mosaic.vibrate(0.5);
+                    mosaic.popupDialog(null, "Conguratulate! You pop the bottle.", "Close");
                 }
             }
         }
     }
 
     @Override
-    public void onGameCollision(JGameLib.Card card1, JGameLib.Card card2) {}
+    public void onGameCollision(Mosaic.Card card1, Mosaic.Card card2) {}
 
     @Override
     public void onGameTimer() {}
